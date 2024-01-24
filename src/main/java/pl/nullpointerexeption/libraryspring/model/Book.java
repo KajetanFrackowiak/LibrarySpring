@@ -1,6 +1,7 @@
 package pl.nullpointerexeption.libraryspring.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 public class Book {
 
     @Id
@@ -32,5 +34,8 @@ public class Book {
     private String isbn;
     private Integer availableCopies;
 
+    public Book() {
+
+    }
 }
 

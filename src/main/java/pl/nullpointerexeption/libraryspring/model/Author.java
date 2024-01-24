@@ -4,12 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 public class Author {
 
     @Id
@@ -20,4 +22,7 @@ public class Author {
     private Integer birthYear;
     private String nationality;
 
+    public Author() {
+
+    }
 }
