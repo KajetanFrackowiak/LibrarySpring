@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -16,7 +18,14 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookID;
 
+    @Column
     private String title;
+    @Column
+    private Integer publicationYear;
+    @Column
+    private String isbn;
+    @Column
+    private Integer availableCopies;
 
     @ManyToOne
     @JoinColumn(name = "authorID")
@@ -30,9 +39,7 @@ public class Book {
     @JoinColumn(name = "publisherID")
     private Publisher publisher;
 
-    private Integer publicationYear;
-    private String isbn;
-    private Integer availableCopies;
+
 
     public Book() {
 

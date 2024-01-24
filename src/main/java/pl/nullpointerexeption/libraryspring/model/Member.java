@@ -1,12 +1,11 @@
 package pl.nullpointerexeption.libraryspring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,9 +17,13 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberID;
 
+    @Column
     private String memberName;
+    @Column
     private Integer birthYear;
+    @Column
     private String address;
+    @Column
     private String email;
 
     public Member() {

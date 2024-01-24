@@ -2,26 +2,26 @@ CREATE DATABASE IF NOT EXISTS Library;
 
 USE Library;
 
-CREATE TABLE IF NOT EXISTS Authors (
+CREATE TABLE IF NOT EXISTS Author (
                                        AuthorID INT PRIMARY KEY,
                                        AuthorName VARCHAR(255) NOT NULL,
     BirthYear INT,
     Nationality VARCHAR(50)
     );
 
-CREATE TABLE IF NOT EXISTS Genres (
+CREATE TABLE IF NOT EXISTS Genre (
                                       GenreID INT PRIMARY KEY,
                                       GenreName VARCHAR(50) NOT NULL
     );
 
-CREATE TABLE IF NOT EXISTS Publishers (
+CREATE TABLE IF NOT EXISTS Publisher (
                                           PublisherID INT PRIMARY KEY,
                                           PublisherName VARCHAR(255) NOT NULL,
     EstablishedYear INT,
     HQLocation VARCHAR(100)
     );
 
-CREATE TABLE IF NOT EXISTS Members (
+CREATE TABLE IF NOT EXISTS Member (
                                        MemberID INT PRIMARY KEY,
                                        MemberName VARCHAR(255) NOT NULL,
     BirthYear INT,
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Members (
     Email VARCHAR(255) UNIQUE
     );
 
-CREATE TABLE IF NOT EXISTS Books (
+CREATE TABLE IF NOT EXISTS Book (
                                      BookID INT PRIMARY KEY,
                                      Title VARCHAR(255) NOT NULL,
     AuthorID INT,
