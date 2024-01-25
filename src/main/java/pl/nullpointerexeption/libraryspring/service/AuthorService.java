@@ -1,8 +1,8 @@
 package pl.nullpointerexeption.libraryspring.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.nullpointerexeption.libraryspring.exception.AuthorNotFoundException;
 import pl.nullpointerexeption.libraryspring.model.Author;
 import pl.nullpointerexeption.libraryspring.repository.AuthorRepository;
 
@@ -19,11 +19,11 @@ public class AuthorService {
     }
 
     public Author getAuthorById(Long id) {
-        return authorRepository.findById(id).orElse(null);
+        return authorRepository.findById(id).orElseThrow(() -> AuthorNotFoundException("Author with id " + id + " not found"));
     }
     public Author updateAuthor(Author updatedAuthor) {
         Author existingAuthor = authorRepository.findById(updatedAuthor.getAuthorID())
-                .orElseThrow(() -> new EntityNotFoundException("Author not found"));
+                .orElseThrow(() -> AuthorNotFoundException("Author with id " + updatedAuthor.getAuthorID() + " not found"));
 
         // Aktualizuj pola autora
         existingAuthor.setAuthorName(updatedAuthor.getAuthorName());
