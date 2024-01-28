@@ -1,8 +1,8 @@
 package pl.nullpointerexeption.libraryspring.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.nullpointerexeption.libraryspring.exception.BookNotFoundException;
 import pl.nullpointerexeption.libraryspring.model.Book;
 import pl.nullpointerexeption.libraryspring.repository.BookRepository;
 
@@ -19,13 +19,15 @@ public class BookService {
     }
 
     public Book getBookById(Long id) {
-        return bookRepository.findById(id).orElse(null);
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundException("Book with id " + id + " not found"));
     }
+
     public Book updateBook(Book updatedBook) {
         Book existingBook = bookRepository.findById(updatedBook.getBookID())
-                .orElseThrow(() -> new EntityNotFoundException("Book not found"));
+                .orElseThrow(() -> new BookNotFoundException("Book with id " + updatedBook.getBookID() + " not found"));
 
-        // Aktualizuj pola książki
+        // Update book fields
         existingBook.setTitle(updatedBook.getTitle());
         existingBook.setAuthor(updatedBook.getAuthor());
         existingBook.setGenre(updatedBook.getGenre());

@@ -20,7 +20,6 @@ public class PublisherController {
 
     @Autowired
     private PublisherService publisherService;
-
     @Autowired
     private PublisherLogger publisherLogger;
 
@@ -41,7 +40,6 @@ public class PublisherController {
 
     @GetMapping
     public List<Publisher> getAllPublishers() {
-        logMessages();
         return publisherService.getAllPublishers();
     }
 
@@ -73,7 +71,6 @@ public class PublisherController {
     public void deletePublisher(@PathVariable Long id) {
         publisherService.deletePublisher(id);
     }
-
     @GetMapping("/logs")
     public Stream<String> getLogs() throws IOException {
         return publisherLogger.readLogFile("logs/app.log");

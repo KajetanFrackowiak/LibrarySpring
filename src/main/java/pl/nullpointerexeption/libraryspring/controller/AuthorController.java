@@ -71,7 +71,6 @@ public class AuthorController {
     public void deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
     }
-
     @GetMapping("/logs")
     public Stream<String> getLogs() throws IOException {
         return AuthorLogger.readLogFile("logs/app.log");

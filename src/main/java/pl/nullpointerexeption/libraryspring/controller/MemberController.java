@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.nullpointerexeption.libraryspring.logger.MemberLogger;
 import pl.nullpointerexeption.libraryspring.model.Member;
 import pl.nullpointerexeption.libraryspring.service.MemberService;
-import pl.nullpointerexeption.libraryspring.logger.MemberLogger;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,7 +40,6 @@ public class MemberController {
 
     @GetMapping
     public List<Member> getAllMembers() {
-        logMessages();
         return memberService.getAllMembers();
     }
 

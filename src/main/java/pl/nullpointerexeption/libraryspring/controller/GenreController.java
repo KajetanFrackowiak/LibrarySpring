@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.nullpointerexeption.libraryspring.logger.GenreLogger;
 import pl.nullpointerexeption.libraryspring.model.Genre;
 import pl.nullpointerexeption.libraryspring.service.GenreService;
-import pl.nullpointerexeption.libraryspring.logger.GenreLogger;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +20,7 @@ public class GenreController {
 
     @Autowired
     private GenreService genreService;
+
     @Autowired
     private GenreLogger genreLogger;
 
@@ -40,7 +41,6 @@ public class GenreController {
 
     @GetMapping
     public List<Genre> getAllGenres() {
-        logMessages();
         return genreService.getAllGenres();
     }
 
