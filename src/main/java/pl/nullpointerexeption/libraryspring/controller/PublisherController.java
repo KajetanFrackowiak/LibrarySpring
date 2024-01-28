@@ -1,14 +1,19 @@
 package pl.nullpointerexeption.libraryspring.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.nullpointerexeption.libraryspring.logger.PublisherLogger;
 import pl.nullpointerexeption.libraryspring.model.Publisher;
 import pl.nullpointerexeption.libraryspring.service.PublisherService;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Stream;
 
+@Slf4j
 @RestController
 @RequestMapping("/publishers")
 public class PublisherController {
@@ -16,8 +21,27 @@ public class PublisherController {
     @Autowired
     private PublisherService publisherService;
 
+    @Autowired
+    private PublisherLogger publisherLogger;
+
+    public void logMessages() {
+        List<Publisher> allPublishers = publisherService.getAllPublishers();
+        log.info("Getting all publishers. Total publishers: {}", allPublishers.size());
+        if (!allPublishers.isEmpty()) {
+            Publisher firstPublisher = allPublishers.get(0);
+            log.debug("First publisher details: {}", firstPublisher);
+        }
+        try {
+            Publisher savedPublisher = publisherService.savePublisher(new Publisher());
+            log.info("Saved publisher: {}", savedPublisher);
+        } catch (Exception e) {
+            log.error("An error occurred: {}", e.getMessage(), e);
+        }
+    }
+
     @GetMapping
     public List<Publisher> getAllPublishers() {
+        logMessages();
         return publisherService.getAllPublishers();
     }
 
@@ -48,5 +72,10 @@ public class PublisherController {
     @DeleteMapping("/{id}")
     public void deletePublisher(@PathVariable Long id) {
         publisherService.deletePublisher(id);
+    }
+
+    @GetMapping("/logs")
+    public Stream<String> getLogs() throws IOException {
+        return publisherLogger.readLogFile("logs/app.log");
     }
 }
